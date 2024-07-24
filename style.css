@@ -1,0 +1,24 @@
+* {
+    margin: 3;
+    box-sizing: border-box;
+}
+
+body {
+
+}
+
+.container {
+
+}
+
+.hangman-box {
+    width: 435px;
+    height: 430px;
+    overflow: hidden;
+    position: relative;
+}
+
+.word-display {
+    
+}
+
