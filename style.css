@@ -10,13 +10,14 @@ body {
     justify-content: center;
     min-height: 100vh;
     background: #f0b470;
+    padding: 0px 10px;
 }
 .container {
     width: 850px;
     background: #fff;
     display: flex;
     gap: 70px;
-    align-items: flex-end;
+    align-items: center;
     padding: 60px 40px;
     border-radius: 10px;
     background-color: #ffffff;
@@ -62,13 +63,13 @@ body {
 .game-box .guesses-text {
     color: #ff0000;
 }
-.game-box .consonants {
+.game-box .keyboard {
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
     justify-content: center;
 }
-.all-button {
+:where(.game-modal .keyboard) button {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -78,10 +79,10 @@ body {
     border-radius: 4px;
     width: 40px;
 }
-.consonant-button {
+.keyboard-button {
     padding: 3px;
 }
-.all-button:hover {
+:where(.game-modal .keyboard) button:hover {
     background: #fdca87d3;
 }
 .game-modal {
@@ -94,6 +95,7 @@ body {
     align-items: center;
     justify-content: center;
     background-color: #00000058;
+    display: none;
 }
 .game-modal .content {
     max-width: 420px;
@@ -110,4 +112,18 @@ body {
     padding: 4px;
     cursor: pointer;
     font-size: smaller;
+}
+
+@media (max-width: 782px) {
+    .container {
+        flex-direction: column;
+        padding: 30px 15px;
+        align-items: center;
+    }
+    .hangman-box img {
+        max-width: 200px;
+    }
+    .hangman-box h1 {
+        display: none;
+    }
 }

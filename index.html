@@ -8,18 +8,20 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
+        <script src="scripts/word-list.js" defer></script>
+        <script src="scripts/script.js" defer></script>
     </head>
     <body>
         <div class="game-modal">
             <div class="content">
-                <img src="img/game-over.png" alt="game-over-img">
+                <img src="images/game-over.png" alt="game-over-img">
                 <h4>Nooopee....</h4>
-                <button class="all-button play-again">OK</button>
+                <button class="play-again">OK</button>
             </div>
         </div>
         <div class="container">
             <div class="hangman-box">
-                <img src="img/0.png" alt="hangman-img">
+                <img src="images/0.png" alt="hangman-img">
                 <h1>Hangman Korean</h1>
             </div>
             <div class="game-box">
@@ -37,9 +39,8 @@
                     Chances Left:
                     <b>9 / 9</b>
                 </h4>
-                <div class="consonants" id="consonants"></div>
+                <div class="keyboard" id="keyboard"></div>
             </div>
         </div>
-        <script src="script.js"></script>
     </body>
 </html>
