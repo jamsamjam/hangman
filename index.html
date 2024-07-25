@@ -2,41 +2,44 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Hangman Game Korean</title>
-        <link rel="stylesheet" href="styles.css">
+        <title>Hangman Korean</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <div class="game-modal">
+            <div class="content">
+                <img src="img/game-over.png" alt="game-over-img">
+                <h4>Try Again..</h4>
+                <button class="play-again">OK</button>
+            </div>
+        </div>
         <div class="container">
             <div class="hangman-box">
-                <img src="img/0.png"
-                style="width: 350px; height: 350px; object-fit: cover; object-position: 0; "
-                alt="hangman-img">
+                <img src="img/0.png" alt="hangman-img">
+                <h1>Hangman Korean</h1>
             </div>
-            <div class="word-box">
-                <u1 class="word-display">
+            <div class="game-box">
+                <ul class="word-display">
+                    <li class="initial"></li>
+                    <li class="initial guessed">ㄱ</li>
                     <li class="initial"></li>
                     <li class="initial"></li>
                     <li class="initial"></li>
-                    <li class="initial"></li>
-                    <li class="initial"></li>
-                    
-                </u1>
+                </ul>
+                <h4 class="english-text">
+                    <b><CHERRY</b>
+                </h4>
+                <h4 class="guesses-text">
+                    Chances Left:
+                    <b>9 / 9</b>
+                </h4>
+                <div class="consonants" id="consonants"></div>
             </div>
-            <h3 class="english-text">
-                CHERRY
-            </h3>
-            <h4 class="guesses-text">
-                Chances left:
-                <b> 9 / 9</b>
-            </h4>
-            <div class="consonants">
-                <button>ㄱ</button><button>ㄴ</button><button>ㄷ</button><button>ㄹ</button>
-                <button>ㅁ</button><button>ㅂ</button><button>ㅅ</button>
-                <button>ㅇ</button><button>ㅈ</button><button>ㅊ</button><button>ㅋ</button>
-                <button>ㅌ</button><button>ㅍ</button><button>ㅎ</button>
-                <button>ㄲ</button><button>ㄸ</button><button>ㅃ</button><button>ㅆ</button>
-                <button>ㅉ</button>
-                <button>ㅋ</button><button>ㅌ</button><button>ㅍ</button><button>ㅊ</button>
-            </div>
+        </div>
+        <script src="script.js"></script>
     </body>
 </html>
