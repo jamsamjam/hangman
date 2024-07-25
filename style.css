@@ -26,7 +26,7 @@ body {
     width: 350px;
 }
 .hangman-box h1 {
-    font-size: 1.75rem;
+    font-size: 1.2rem;
     margin-top: 20px;
     text-align: center;
 }
@@ -68,23 +68,46 @@ body {
     flex-wrap: wrap;
     justify-content: center;
 }
-.consonant-button {
+.all-button {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     outline: none;
-    padding: 3px;
     border: none;
     background: #ff9a36;
     border-radius: 4px;
     width: 40px;
 }
-.consonant-button:hover {
+.consonant-button {
+    padding: 3px;
+}
+.all-button:hover {
     background: #fdca87d3;
 }
 .game-modal {
     position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00000058;
+}
+.game-modal .content {
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
 }
 .game-modal img {
     max-width: 230px;
+}
+.game-modal h4 {
+    font-size: 1.1rem;
+}
+.game-modal button {
+    padding: 4px;
+    cursor: pointer;
+    font-size: smaller;
 }

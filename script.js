@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     consonants.forEach(consonant => {
         const button = document.createElement('button');
         button.textContent = consonant;
-        button.classList.add('consonant-button');
+        button.classList.add('all-button');
         consonantsContainer.appendChild(button);
     });
 });
