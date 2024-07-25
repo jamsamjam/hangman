@@ -1,6 +1,10 @@
 const keyboardDiv = document.querySelector(".keyboard");
 
 const getRandomWord = () => {
+    if (wordList.length === 0) {
+        console.error('Loading words...');
+        return;
+    }
     const { word, hint } = wordList[Math.floor(Math.random() * wordList.length)];
     console.log(word, hint);
     return word;
