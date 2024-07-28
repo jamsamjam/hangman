@@ -9,17 +9,18 @@ const wordList = [];
 const maxGuesses = 9;
 
 let currentWord;
-let revealedLetters = [];
 let leftGuesses = maxGuesses;
 
-// const resetGame = () => {
-//     hangmanImage.src = "images/0.png";
-//     guessesText.innerText = `Chances left: ${leftGuesses} / ${maxGuesses}`;
-//     keyboardDiv.querySelectorAll("button").forEach(btn => btn.disabled = false);
-//     // Create li of word length and inserts in the wordDisplay
-//     wordDisplay.innerHTML = currentWord.split("").map(() => `<li class="letter"></li>`).join("");
-//     gameModal.classList.remove("show");
-// }
+const resetGame = () => {
+    leftGuesses = maxGuesses;
+
+    hangmanImage.src = "images/0.png";
+    keyboardDiv.querySelectorAll("button").forEach(btn => btn.disabled = false);
+
+    // Create li of word length and inserts in the wordDisplay
+    wordDisplay.innerHTML = currentWord.split("").map(() => `<li class="letter"></li>`).join("");
+    gameModal.classList.remove("show");
+}
 
 const getRandomWord = () => {
     if (wordList.length === 0) {
@@ -48,15 +49,15 @@ const gameOver = (isVictory)=> {
 }
 
 function showWordBasedOnInput(input) {
+    const syllables = Hangul.d(currentWord, true);
+    const revealedSyllables = [];
 
-    let letters = Hangul.d(currentWord, true); // TODO let vs const WHY
-
-    // Check each letter (in letters) = array of chars
-    letters.forEach(arrayOfChars => {
+    // Check each syllable (in syllables) = array of chars
+    syllables.forEach(syllable => {
         let isCompleted = true;
 
         // Check if each char is included in the input
-        const filteredArrayOfChars = arrayOfChars.filter(char => {
+        const filteredSyllable = syllable.filter(char => {
             if (input.includes(char))
                 return true;
             else {
@@ -65,29 +66,33 @@ function showWordBasedOnInput(input) {
             }
         });
 
-        const completedArrayOfChars = Hangul.a(filteredArrayOfChars);
+        const completedSyllable = Hangul.a(filteredSyllable);
         // const color = isCompleted ? "#00FF00" : "#FF0000";
         //`<style="color: ${isCompleted}`;">`
-        revealedLetters.push(completedArrayOfChars);
+        revealedSyllables.push(completedSyllable);
     });
 
-    return revealedLetters.join(" ");
+    return revealedSyllables.join(" ");
 }
 
 const initGame = (button, clickedLetter) => {
-    // Check if clickedLetter is included in the currentWord
-    if(Hangul.search(currentWord, clickedLetter) >= 0) {
-        showWordBasedOnInput(clickedLetter);
-    } else {
+    const revealedWord = showWordBasedOnInput(clickedLetter);
+
+    // Update the display with the revealed word
+    wordDisplay.innerHTML = revealedWord.split("").map(letter => `<li class="letter">${letter}</li>`).join("");
+
+    // Handle guesses and game over logic
+    if(Hangul.search(currentWord, clickedLetter) < 0) {
         leftGuesses--;
-        if(leftGuesses === 0) return gameOver(false);
-        hangmanImage.src = `images/${9 - leftGuesses}.png`;
+        
     }
+
     button.disabled = true;
+    hangmanImage.src = `images/${9 - leftGuesses}.png`;
     guessesText.innerHTML = `Chances left: <b style="color: #ff0000;">${leftGuesses} / ${maxGuesses}</b>`;
 
-    if(leftGuesses === 0) return gameOver(false);
-    //if(revealedWord.length === currentWord.length) return gameOver(true);
+    if(leftGuesses <= 0) return gameOver(false);
+    if(revealedWord === currentWord) return gameOver(true);
 }
 
 const keyboard = [
