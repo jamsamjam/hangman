@@ -9,7 +9,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: #f0b470;
+    background: #a2d0f9;
     padding: 0px 10px;
 }
 .container {
@@ -37,6 +37,7 @@ body {
     list-style: none;
     align-items: center;
     justify-content: center;
+    font-family: "Noto Sans KR", sans-serif;
 }
 .word-display .letter {
     width: 28px;
@@ -69,20 +70,21 @@ body {
     flex-wrap: wrap;
     justify-content: center;
 }
-:where(.game-modal .keyboard) button {
+:where(.game-modal, .keyboard) button {
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     outline: none;
     border: none;
-    background: #ff9a36;
+    background: #68b1f1;
     border-radius: 4px;
     width: 40px;
 }
 .keyboard-button {
     padding: 3px;
 }
-:where(.game-modal .keyboard) button:hover {
+:where(.game-modal, .keyboard) button:hover {
     background: #fdca87d3;
 }
 .game-modal {
