@@ -9,6 +9,7 @@ const wordList = [];
 const maxGuesses = 9;
 
 let currentWord;
+let revealedLetters = [];
 let leftGuesses = maxGuesses;
 
 // const resetGame = () => {
@@ -49,7 +50,6 @@ const gameOver = (isVictory)=> {
 function showWordBasedOnInput(input) {
 
     let letters = Hangul.d(currentWord, true); // TODO let vs const WHY
-    let revealedLetters = [];
 
     // Check each letter (in letters) = array of chars
     letters.forEach(arrayOfChars => {
@@ -66,7 +66,8 @@ function showWordBasedOnInput(input) {
         });
 
         const completedArrayOfChars = Hangul.a(filteredArrayOfChars);
-        // const color = isCompleted ? green : red;
+        // const color = isCompleted ? "#00FF00" : "#FF0000";
+        //`<style="color: ${isCompleted}`;">`
         revealedLetters.push(completedArrayOfChars);
     });
 
