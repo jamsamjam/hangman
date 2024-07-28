@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    font-family: "Noto Sans KR", sans-serif;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f0b470;
+    padding: 0px 10px;
+}
+.container {
+    width: 850px;
+    background: #fff;
+    display: flex;
+    gap: 70px;
+    align-items: center;
+    padding: 60px 40px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    justify-content: center;
+}
+.hangman-box img {
+    width: 350px;
+}
+.hangman-box h1 {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    text-align: center;
+}
+.word-display {
+    display: flex;
+    gap: 5px;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+}
+.word-display .letter {
+    width: 28px;
+    font-size: 1.5rem;
+    font-weight: 200;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #000;
+}
+.word-display .letter.guessed {
+    border-color: transparent;
+    margin: -40px 0 35px;
+    font-weight: 800;
+}
+.game-box h4 {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.game-box h4 {
+    font-weight: 600;
+}
+.game-box .guesses-text b {
+    color: #ff0000;
+}
+.game-box .keyboard {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+:where(.game-modal .keyboard) button {
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: #ff9a36;
+    border-radius: 4px;
+    width: 40px;
+}
+.keyboard-button {
+    padding: 3px;
+}
+:where(.game-modal .keyboard) button:hover {
+    background: #fdca87d3;
+}
+.game-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00000058;
+    display: none;
+}
+.game-modal .content {
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+}
+.game-modal img {
+    max-width: 230px;
+}
+.game-modal h4 {
+    font-size: 1.1rem;
+}
+.game-modal button {
+    padding: 4px;
+    cursor: pointer;
+    font-size: smaller;
+}
+
+@media (max-width: 782px) {
+    .container {
+        flex-direction: column;
+        padding: 30px 15px;
+        align-items: center;
+    }
+    .hangman-box img {
+        max-width: 200px;
+    }
+    .hangman-box h1 {
+        display: none;
+    }
+}
