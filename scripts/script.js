@@ -10,15 +10,17 @@ const maxGuesses = 9;
 
 let currentWord;
 let leftGuesses = maxGuesses;
+let guessedLetters = [];
 
 const resetGame = () => {
     leftGuesses = maxGuesses;
-
+    guessedLetters = [];
     hangmanImage.src = "images/0.png";
     keyboardDiv.querySelectorAll("button").forEach(btn => btn.disabled = false);
 
     // Create li of word length and inserts in the wordDisplay
-    wordDisplay.innerHTML = currentWord.split("").map(() => `<li class="letter"></li>`).join("");
+    const numberOfSyllabes = Hangul.d(currentWord, true).length;
+    wordDisplay.innerHTML = Array(numberOfSyllabes).fill('<li class="letter"></li>').join("");
     gameModal.classList.remove("show");
 }
 
@@ -33,12 +35,11 @@ const getRandomWord = () => {
     console.log(word);
     document.querySelector(".hint-text b").innerText = hint;
     // Create li of word length and inserts in the wordDisplay
-    wordDisplay.innerHTML = Hangul.assemble(word).split("").map(() => `<li class="letter"></li>`).join("");
-
-    //resetGame();
+    wordDisplay.innerHTML = currentWord.split("").map(() => `<li class="letter">*</li>`).join("");
+    resetGame();
 }
 
-const gameOver = (isVictory)=> {
+const gameOver = (isVictory) => {
     setTimeout(() => {
         const modalText = isVictory ? "You found the word:" : "The correct word was:";
         gameModal.querySelector("img").src = `images/${isVictory ? 'end': 'game-over'}.png`;
@@ -48,43 +49,54 @@ const gameOver = (isVictory)=> {
     }, 300);
 }
 
-function showWordBasedOnInput(input) {
-    const syllables = Hangul.d(currentWord, true);
-    const revealedSyllables = [];
+const updateWordDisplay = () => {
+    const splitWord = Hangul.d(currentWord, true);
 
-    // Check each syllable (in syllables) = array of chars
-    syllables.forEach(syllable => {
-        let isCompleted = true;
+    const assembledBySyllables = splitWord.map((syllable) => {
+        // Check if all characters in the syllable are guessed
+        const isSyllableGuessed = syllable.every(char => guessedLetters.includes(char));
+        return isSyllableGuessed ? Hangul.a(syllable) : '*';
+    }).join("");
 
-        // Check if each char is included in the input
-        const filteredSyllable = syllable.filter(char => {
-            if (input.includes(char))
-                return true;
-            else {
-                isCompleted = false;
-                return false;
-            }
-        });
-
-        const completedSyllable = Hangul.a(filteredSyllable);
-        // const color = isCompleted ? "#00FF00" : "#FF0000";
-        //`<style="color: ${isCompleted}`;">`
-        revealedSyllables.push(completedSyllable);
-    });
-
-    return revealedSyllables.join(" ");
+    wordDisplay.innerHTML = assembledBySyllables.split("").map(letter => `<li class="letter">${letter}</li>`).join("");
+    return assembledBySyllables;
 }
 
-const initGame = (button, clickedLetter) => {
-    const revealedWord = showWordBasedOnInput(clickedLetter);
+// function showWordBasedOnInput(input) {
+//     const syllables = Hangul.d(currentWord, true);
+//     const revealedSyllables = [];
 
-    // Update the display with the revealed word
-    wordDisplay.innerHTML = revealedWord.split("").map(letter => `<li class="letter">${letter}</li>`).join("");
+//     // Check each syllable (in syllables) = array of chars
+//     syllables.forEach(syllable => {
+//         let isCompleted = true;
+
+//         // Check if each char is included in the input
+//         const filteredSyllable = syllable.filter(char => {
+//             if (input.includes(char))
+//                 return true;
+//             else {
+//                 isCompleted = false;
+//                 return false;
+//             }
+//         });
+
+//         const completedSyllable = isCompleted ? Hangul.a(filteredSyllable) : '*';
+//         // const color = isCompleted ? "#00FF00" : "#FF0000";
+//         //`<style="color: ${isCompleted}`;">`
+//         revealedSyllables.push(completedSyllable);
+//     });
+
+//     return revealedSyllables.join(" ");
+// }
+
+const initGame = (button, clickedLetter) => {
+    guessedLetters.push(clickedLetter);
+    
+    const revealedWord = updateWordDisplay();
 
     // Handle guesses and game over logic
     if(Hangul.search(currentWord, clickedLetter) < 0) {
         leftGuesses--;
-        
     }
 
     button.disabled = true;

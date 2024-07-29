@@ -13,7 +13,7 @@ body {
     padding: 0px 10px;
 }
 .container {
-    width: 850px;
+    width: 750px;
     background: #fff;
     display: flex;
     gap: 70px;
@@ -99,10 +99,17 @@ body {
     background-color: #00000058;
     display: none;
 }
+.game-modal.show {
+    display: flex;
+}
 .game-modal .content {
-    max-width: 420px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
     width: 100%;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .game-modal img {
     max-width: 230px;
